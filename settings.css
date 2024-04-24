@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #128bdb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    margin-right: 20px; /* Add margin between options */
+}
+
+.option i {
+    margin-right: 10px;
+}
+
+.option button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option button:hover {
+    background-color: #0056b3;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture input[type="file"] {
+    display: none;
+}
+
+.profile-picture button {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.profile-picture button:hover {
+    color: #0056b3;
+}
+
+/* Dark mode toggle styling */
+.toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toggle-label {
+    display: block;
+    overflow: hidden;
+    width: 2.5rem;
+    height: 1.5rem;
+    background-color: #777;
+    border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    background-color: #4CAF50;
+}
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider.round {
+    border-radius: 1.5rem;
+}
+
+.slider.round:before {
+    position: absolute;
+    content: "";
+    height: 1.75rem;
+    width: 1.75rem;
+    left: 0.125rem;
+    bottom: -0.125rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.toggle-checkbox:checked + .toggle-label .slider {
+    background-color: #66BB6A;
+}
+
+.toggle-checkbox:checked + .toggle-label .slider:before {
+    transform: translateX(1.5rem);
+}
