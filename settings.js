@@ -17,8 +17,8 @@ function changeProfilePicture() {
     }
 }
 function changePassword() {
-    // Redirect user to the change password page
-    window.location.href = "change.password.html";
+    // Redirect user to the index1 file 
+    window.location.href = "index1.html";
 }
 function contactSupport() {
     // Add logic to redirect to email for support
@@ -30,7 +30,7 @@ function deleteAccount() {
         // Add your logic here to delete the account
         alert("Your account has been successfully deleted.");
         // Redirect the user to the home page
-        window.location.href = "fit.html"; // Change 'home.html' to the actual URL of your home page
+        window.location.href = "index.html"; // Change 'home.html' to the actual URL of your home page
     } else {
         alert("Account deletion canceled.");
     }
@@ -40,7 +40,7 @@ function logout() {
 
     if (confirmLogout) {
         // Redirect to the login page if needed
-        window.location.href = 'fit.html'; 
+        window.location.href = 'index.html'; 
         // Clear local storage data if needed
         localStorage.removeItem('userData');
     } else {
