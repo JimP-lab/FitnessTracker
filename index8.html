@@ -35,7 +35,7 @@
                 .then(function(response) {
                     console.log('Verification email sent: ', response.status, response.text);
                     // Redirect user to home page after email is sent
-                    window.location.href = "homepage.html";
+                    window.location.href = "index.html";
                 }, function(error) {
                     console.error('Failed to send verification email: ', error);
                 });
