@@ -29,13 +29,12 @@
             },
         }
 
-        function sendVerificationEmail() { // Added function to send verification email
-            emailjs.init("user_youruserid"); // Initialize Email.js with your user ID
-            emailjs.send("service_yourserviceid", "template_yourtemplateid", { /* Email template parameters */ })
+        function sendVerificationEmail() { // Added function to send verification email 
+            emailjs.send("service_d3krnmd", "template_t9yr5yc", { /* Email template parameters */ })
                 .then(function(response) {
                     console.log('Verification email sent: ', response.status, response.text);
                     // Redirect user to home page after email is sent
-                    window.location.href = "index.html";
+                    window.location.href = "homepage.html";
                 }, function(error) {
                     console.error('Failed to send verification email: ', error);
                 });
