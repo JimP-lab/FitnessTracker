@@ -1,0 +1,92 @@
+<html>
+<head>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#1F2937',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+
+        function sendVerificationEmail() {
+            // Here you would integrate with EmailJS or your chosen email service to send verification email
+            // After sending the email, you can redirect the user to the home page
+            // For demonstration purposes, I'll simulate a redirect after 3 seconds
+            setTimeout(function() {
+                window.location.href = "home.html"; // Redirect to home page
+            }, 3000);
+        }
+    </script>
+</head>
+<body class="bg-dark-blue flex items-center justify-center h-screen">
+    <div id="app"></div>
+
+    <script type="text/babel"> 
+        function App() {
+            const [agreeTerms, setAgreeTerms] = React.useState(false);
+
+            const handleSignUp = (e) => {
+                e.preventDefault();
+                if (agreeTerms) {
+                    sendVerificationEmail();
+                }
+            };
+
+            return (
+                <div className="bg-white rounded-xl p-8 max-w-sm mx-auto shadow-lg">
+                    <div className="flex justify-center mb-2">
+                        <img src="images/logo2.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
+                    </div>
+                    <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
+                    <form onSubmit={handleSignUp}>
+                        <div className="mb-4">
+                            <input type="text" placeholder="First Name" className="w-full p-4 border border-gray-300 rounded-xl" />
+                        </div>
+                        <div className="mb-4">
+                            <input type="text" placeholder="Last Name" className="w-full p-4 border border-gray-300 rounded-xl" />
+                        </div>
+                        <div className="mb-4">
+                            <input type="email" placeholder="Email" className="w-full p-4 border border-gray-300 rounded-xl" />
+                        </div>
+                        <div className="mb-4">
+                            <input type="text" placeholder="Username" className="w-full p-4 border border-gray-300 rounded-xl" />
+                        </div>
+                        <div className="mb-4">
+                            <input type="password" placeholder="Password" className="w-full p-4 border border-gray-300 rounded-xl" />
+                        </div>
+                        <div className="flex items-center mb-6">
+                            <input type="checkbox" id="terms" className="mr-2" onChange={() => setAgreeTerms(!agreeTerms)} />
+                            <label htmlFor="terms" className="text-sm text-gray-600">Agree to <a href="index5.html" className="text-blue-600 hover:underline">Terms</a> & <a href="index6.html" className="text-blue-600 hover:underline">Privacy Policy</a></label>
+                        </div>
+                        <button type="submit" className={`w-full p-4 bg-blue-600 text-white rounded-xl mb-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 ${!agreeTerms && 'opacity-50 cursor-not-allowed'}`} disabled={!agreeTerms}>Sign Up</button>
+                    </form>
+                    <div className="text-center text-sm">
+                        Already have an account? <a href="index.html" className="text-blue-600 hover:underline">Log In</a>
+                    </div>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+</body>
+</html>
