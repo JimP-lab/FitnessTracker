@@ -9,14 +9,14 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
+        </script>
+        <script type="text/javascript">
         (function(){
-            emailjs.init({
-                publicKey: "aJVPJ9Wom2V2QWFFe",
-            });
+      emailjs.init({
+        publicKey: "aJVPJ9Wom2V2QWFFe",
+      });
         })();
-    </script>
+        </script>
     <style>
         body {
             background-color: #ffffff; /* Set the background to white */
@@ -45,11 +45,11 @@
             }
 
             // Replace these values with your own
-            const = 'service sqy4nak ';
-            const = 'template_980kkpv';
+            const Service = 'service sqy4nak';
+            const Email= 'template_980kkpv';
 
             // Send email using emailjs-com library
-            emailjs.send("service sqy4nak","template_980kkpv" { to_email: email })
+            emailjs.send("service sqy4nak","template_980kkpv",{ to_email: email },)
                 .then((response) => {
                     console.log('Email sent successfully:', response);
                     setMessage(`Email verification sent to ${email}`);
@@ -59,7 +59,6 @@
                     setMessage("Failed to send email verification.");
                 });
         };
-
         return (
             <div className="flex justify-center items-center h-screen">
                 <div className="bg-white p-6 rounded-3xl shadow-lg" style={{ width: '400px' }}>
@@ -90,4 +89,3 @@
 </script>
 </body>
 </html>
-
