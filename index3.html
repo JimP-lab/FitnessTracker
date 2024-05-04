@@ -6,17 +6,6 @@
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        </script>
-        <script type="text/javascript">
-        (function(){
-      emailjs.init({
-        publicKey: "aJVPJ9Wom2V2QWFFe",
-      });
-        })();
-        </script>
     <style>
         body {
             background-color: #ffffff; /* Set the background to white */
@@ -34,32 +23,7 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-    function App() {
-        const [email, setEmail] = React.useState("");
-        const [message, setMessage] = React.useState("");
-
-        const sendEmailVerification = () => {
-            if (!email) {
-                setMessage("Please enter your email.");
-                return;
-            }
-
-            // Replace these values with your own
-            const Service = 'service sqy4nak';
-            const Email= 'template_980kkpv';
-
-            // Send email using emailjs-com library
-            emailjs.send("service sqy4nak","template_980kkpv",{ to_email: email },)
-                .then((response) => {
-                    console.log('Email sent successfully:', response);
-                    setMessage(`Email verification sent to ${email}`);
-                })
-                .catch((error) => {
-                    console.error('Error sending email:', error);
-                    setMessage("Failed to send email verification.");
-                });
-        };
-        return (
+    (
             <div className="flex justify-center items-center h-screen">
                 <div className="bg-white p-6 rounded-3xl shadow-lg" style={{ width: '400px' }}>
                     <div className="mb-6">
