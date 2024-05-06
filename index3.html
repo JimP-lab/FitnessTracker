@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #ffffff; /* Set the background to white */
+            background-color: #0fa6e2; /* Set the background to white */
             font-family: 'Inter', sans-serif; /* Apply the Inter font */
         }
         #root {
@@ -23,7 +23,16 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-    (
+    function App() {
+        const [email, setEmail] = React.useState("");
+        const [message, setMessage] = React.useState("");
+        const sendEmailVerification = () => {
+            if (!email) {
+                setMessage("Please enter your email.");
+                return;
+            }
+        };
+        return (
             <div className="flex justify-center items-center h-screen">
                 <div className="bg-white p-6 rounded-3xl shadow-lg" style={{ width: '400px' }}>
                     <div className="mb-6">
