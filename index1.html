@@ -40,13 +40,23 @@
 </head>
 <body>
     <div id="app"></div>
-
     <script src="https://unpkg.com/react/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/babel">
         function App() {
+            const [newPassword, setNewPassword] = React.useState("");
+
+            const handleSave = () => {
+                if (!newPassword.trim()) {
+                    alert("Enter Your Password");
+                } else {
+                    // Redirect to home page
+                    window.location.href = "index.html";
+                }
+            };
+
             return (
                 <div className="p-8">
                     <div className="mb-6">
@@ -69,6 +79,8 @@
                             id="new-password"
                             type="password"
                             placeholder="******************"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </div>
                     <div className="mb-6">
@@ -93,7 +105,7 @@
                         <button
                             className="button button-purple text-white font-bold py-2 px-4 rounded focus:outline-none"
                             type="submit"
-                            onClick={() => { window.location.href = "index.html"; }}
+                            onClick={handleSave}
                         >
                             Save
                         </button>
