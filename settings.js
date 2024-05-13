@@ -21,8 +21,8 @@ function changePassword() {
     window.location.href = "index1.html";
 }
 function contactSupport() {
-    // Add logic to redirect to email for support
-    window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=sfitnesstracker116@gmail.com";
+    // Add logic to redirect to index8 file for support 
+    window.location.href = "index8.html";
 }
 function deleteAccount() {
     const confirmation = confirm("Are you sure you want to delete your account?.");
