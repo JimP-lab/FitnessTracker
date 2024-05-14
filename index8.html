@@ -4,7 +4,6 @@
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="Form.js"async></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -56,6 +55,24 @@
         .form-container button:hover {
             background-color: #45a049;
         }
+        
+        @media (max-width: 1200px) {
+            .form-container {
+                width: 70%; /* Adjust width for larger screens */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%; /* Adjust width for tablets */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .form-container {
+                width: 100%; /* Adjust width for mobile devices */
+            }
+        }
     </style>
     <script>
         tailwind.config = {
@@ -91,8 +108,6 @@
                             <input id="first-name" name="first-name" type="text" />
                             <label for="last-name">Last name</label>
                             <input id="last-name" name="last-name" type="text" />
-                            <label for="Email">Email</label>
-                            <input id="Email" name="Email" type="text" />
                             <label for="message">Message</label>
                             <textarea id="message" name="message" cols="15" rows="5"></textarea>
                             <button type="submit">Submit</button>
