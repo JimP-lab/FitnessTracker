@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="form.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -95,8 +97,29 @@
 </head>
 <body>
     <div id="app"></div>
-    <script type="text/babel"> 
+    <script type="text/babel">
+        function validateForm() {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('Email').value;
+            const message = document.getElementById('message').value;
+
+            if (firstName === '' || lastName === '' || email === '' || message === '') {
+                alert('Fulfill The Form');
+                return false;
+            }
+            return true;
+        }
+
         class App extends React.Component {
+            componentDidMount() {
+                document.getElementById('submit-btn').addEventListener('click', function(event) {
+                    if (!validateForm()) {
+                        event.preventDefault();
+                    }
+                });
+            }
+
             render() {
                 return (
                     <div className="form-container">
@@ -104,21 +127,22 @@
                             <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
                         </div>
                         <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
-                        <form class="vertical-form" action="https://submit-form.com/Kj5fXrujv" method="POST" onsubmit="return validateForm()">
-                            <label for="first-name">First name</label>
+                        <form className="vertical-form" action="https://submit-form.com/Kj5fXrujv" method="POST">
+                            <label htmlFor="first-name">First name</label>
                             <input id="first-name" name="first-name" type="text" />
-                            <label for="last-name">Last name</label>
+                            <label htmlFor="last-name">Last name</label>
                             <input id="last-name" name="last-name" type="text" />
-                            <label for="Email">Email</label>
+                            <label htmlFor="Email">Email</label>
                             <input id="Email" name="Email" type="text" />
-                            <label for="message">Message</label>
+                            <label htmlFor="message">Message</label>
                             <textarea id="message" name="message" cols="15" rows="5"></textarea>
-                            <button type="submit">Submit</button>
+                            <button id="submit-btn" type="submit" onClick={validateForm}>Submit</button>
                         </form>
                     </div>
                 );
             }
         }
+
         ReactDOM.render(<App />, document.getElementById('app'));
     </script>
 </body>
