@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,8 +75,8 @@
         return (
             <div className="bg-white rounded-xl p-8 max-w-sm mx-auto shadow-lg">
                 <div className="flex justify-center mb-6">
-                    <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
-                 </div>
+                    <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto"/>
+                </div>
                 <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
                 <form>
                     <div className="mb-4">
@@ -88,7 +87,7 @@
                     </div>   
                     <div className="flex items-center justify-between mb-6">
                     <label className="flex items-center">
-                     <a href="index3.html" className="text-blue-600 hover:underline">Forgot your Password</a>
+                            <a href="index3.html" className="text-blue-600 hover:underline">Forgot your Password</a>
                      </label>
                     </div>   
                     <button type="button" className="w-full p-4 bg-blue-600 text-white rounded-xl mb-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" onClick={validateCredentials}>Sign In</button>
@@ -208,7 +207,7 @@
                             <button onclick="changePassword()">Change Password</button>
                         </div>
                         <div class="option">
-                            <span>Contact/Support</span>
+                            <span>Contact Support</span>
                             <button onclick="contactSupport()">Contact Support</button>
                         </div>
                         <div class="option">
@@ -221,14 +220,10 @@
                     </div>
                 `;
                 break;
-            // Add more cases for additional options
-            default:
-                text = "<h2>Welcome to Fitness Tracker</h2>";
         }
         contentDiv.innerHTML = text;
     }
 </script>
 </body>
 </html>
-
 
