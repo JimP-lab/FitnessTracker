@@ -25,10 +25,10 @@ function contactSupport() {
     window.location.href = "index8.html";
 }
 function deleteAccount() {
-    const confirmation = confirm("Do you want to delete your account?.");
+    const confirmation = confirm('Do you want to delete your account?');
     if (confirmation) {
         // Add your logic here to delete the account
-        alert("Your account has been deleted.");
+        alert('Your account has been deleted.');
         // Redirect the user to the home page
         window.location.href = "index.html"; // Change 'home.html' to the actual URL of your home page
     } else {
