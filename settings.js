@@ -13,7 +13,7 @@ function changeProfilePicture() {
 
         // Add your logic here to handle the added picture, e.g., save it to the server
         // For demonstration, let's show an alert
-        alert('Profile picture changed successfully!');
+        alert('Profile picture changed');
     }
 }
 function changePassword() {
@@ -25,10 +25,10 @@ function contactSupport() {
     window.location.href = "index8.html";
 }
 function deleteAccount() {
-    const confirmation = confirm("Are you sure you want to delete your account?.");
+    const confirmation = confirm("Do you want to delete your account?.");
     if (confirmation) {
         // Add your logic here to delete the account
-        alert("Your account has been successfully deleted.");
+        alert("Your account has been deleted.");
         // Redirect the user to the home page
         window.location.href = "index.html"; // Change 'home.html' to the actual URL of your home page
     } else {
