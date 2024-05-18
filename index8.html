@@ -104,16 +104,40 @@
             const email = document.getElementById('Email').value;
             const message = document.getElementById('message').value;
 
+            const nameRegex = /^[A-Za-z\s]+$/;
+
             if (firstName === '' || lastName === '' || email === '' || message === '') {
                 alert('Fulfill The Form');
                 return false;
             }
+
+            if (!nameRegex.test(firstName)) {
+                alert('Enter Your Name');
+                return false;
+            }
+
+            if (!nameRegex.test(lastName)) {
+                alert('Enter Your Last Name');
+                return false;
+            }
+
+            if (!email.includes('@')) {
+                alert('Enter a valid Email Address');
+                return false;
+            }
+
+            // If validation is successful, clear the form fields
+            document.getElementById('first-name').value = '';
+            document.getElementById('last-name').value = '';
+            document.getElementById('Email').value = '';
+            document.getElementById('message').value = '';
+
             return true;
         }
 
         class App extends React.Component {
             componentDidMount() {
-                document.getElementById('submit-btn').addEventListener('click', function(event) {
+                document.querySelector('form').addEventListener('submit', function(event) {
                     if (!validateForm()) {
                         event.preventDefault();
                     }
@@ -136,7 +160,7 @@
                             <input id="Email" name="Email" type="text" />
                             <label htmlFor="message">Message</label>
                             <textarea id="message" name="message" cols="15" rows="5"></textarea>
-                            <button id="submit-btn" type="submit" onClick={validateForm}>Submit</button>
+                            <button id="submit-btn" type="submit">Submit</button>
                         </form>
                     </div>
                 );
