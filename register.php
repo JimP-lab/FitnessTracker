@@ -12,13 +12,13 @@ function sendVerificationEmail($userEmail, $verificationLink) {
         $mail->isSMTP();
         $mail->Host = 'smtp.example.com'; // Your SMTP server
         $mail->SMTPAuth = true;
-        $mail->Username = 'your-email@example.com'; // SMTP username
-        $mail->Password = 'your-email-password'; // SMTP password
+        $mail->Username = 'sfitnesstracker116@gmail.com'; // SMTP username
+        $mail->Password = 'sfskhj1233144'; // SMTP password // app paswword google example code for now // replace it with app password in your email of app 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         //Recipients
-        $mail->setFrom('your-email@example.com', 'Your App Name');
+        $mail->setFrom('sfitnesstracker116@gmail.com.', 'FitnessTracker');
         $mail->addAddress($userEmail);
 
         // Content
