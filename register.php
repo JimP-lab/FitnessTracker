@@ -1,62 +1,64 @@
 <?php
-require 'config.php';
 require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function sendVerificationEmail($email, $token) {
+function sendVerificationEmail($userEmail, $verificationLink) {
     $mail = new PHPMailer(true);
+    
     try {
-        // Server settings
+        //Server settings
         $mail->isSMTP();
-        $mail->Host = SMTP_HOST;
+        $mail->Host = 'smtp.example.com'; // Your SMTP server
         $mail->SMTPAuth = true;
-        $mail->Username = SMTP_USER;
-        $mail->Password = SMTP_PASS;
+        $mail->Username = 'your-email@example.com'; // SMTP username
+        $mail->Password = 'your-email-password'; // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = SMTP_PORT;
+        $mail->Port = 587;
 
-        // Recipient
-        $mail->setFrom(SMTP_USER, 'Your Site');
-        $mail->addAddress($email);
+        //Recipients
+        $mail->setFrom('your-email@example.com', 'Your App Name');
+        $mail->addAddress($userEmail);
 
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Email Verification';
-        $verificationUrl = SITE_URL . "/verify.php?token=$token&email=$email";
-        $body = file_get_contents('../templates/verification.html');
-        $body = str_replace('{{verificationUrl}}', $verificationUrl, $body);
-        $mail->Body = $body;
+
+        // Load email template
+        $emailTemplate = file_get_contents('verification_email.html');
+        $emailTemplate = str_replace('{{verification_link}}', $verificationLink, $emailTemplate);
+
+        $mail->Body = $emailTemplate;
+        $mail->AltBody = 'Please click the link to verify your email: ' . $verificationLink;
 
         $mail->send();
-        return true;
+        echo 'Please Check Your Email';
     } catch (Exception $e) {
-        return false;
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
     $email = $_POST['email'];
-    $token = bin2hex(random_bytes(16));
 
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    if (!empty($username) && !empty($password) && !empty($email)) {
+        // Generate a unique verification link
+        $baseUrl = 'http://yourwebsite.com/verify.php';
+        $userId = 123; // Replace with actual user ID from your database
+        $token = bin2hex(random_bytes(16));
+        
+        // Store the user information and the token in your database
+        // ...
 
-    $stmt = $conn->prepare("INSERT INTO users (username, password, email, token) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $username, $password, $email, $token);
+        $verificationLink = $baseUrl . '?id=' . $userId . '&token=' . $token;
 
-    if ($stmt->execute() && sendVerificationEmail($email, $token)) {
-        echo 'Registration successful! Please check your email to verify your account.';
+        // Send verification email
+        sendVerificationEmail($email, $verificationLink);
     } else {
-        echo 'Registration failed or email could not be sent.';
+        echo 'Complete Your Registration';
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
