@@ -1,10 +1,10 @@
 Fitness Tracker is Fitness Tracker 
 application that allows users to
 track their fitness journey.
-Fitness Tracker is created 
+Fitness Tracker was created 
 with html css JavaScript,php 
 and phpmailer from the backend.
-For the front end is created with 
+For the front end was created with 
 Screenshot to code,prompt engineering,React and Taiwind.
 The logo was created with
 leonardo.ai/and the contact form using formpark.io.and this app was deployed with GitHub pages.
