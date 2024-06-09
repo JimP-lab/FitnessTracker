@@ -1,4 +1,4 @@
-Fitness Tracker is fitness tracker 
+Fitness Tracker is Fitness Tracker 
 application that allows users to
 track their fitness journey.
 Fitness Tracker is created 
