@@ -2,12 +2,12 @@ Fitness Tracker is Fitness Tracker
 application that allows users to
 track their fitness journey in real time.
 Fitness Tracker was created 
-with html css JavaScript,php 
-and phpmailer from the backend.
-For the front end was created with 
-Screenshot to code,prompt engineering,React and Taiwind.
+with html css JavaScript,php, prompt engineering and phpmailer from the backend side.
+For the front end side was created with Screenshot to code,prompt engineering,React and Taiwind.
 The logo was created with
-leonardo.ai/and the contact form using formpark.io.and this app was deployed with GitHub pages.
+leonardo.ai.
+The contact form was created with formpark.
+This app was deployed with GitHub pages.
 Here is the link to Fitness Tracker:
 https://jimp-lab.github.io/FitnessTracker/
 Here is the link to formspark.io: 
