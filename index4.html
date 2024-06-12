@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="test.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -29,6 +31,7 @@
             },
         }
     </script>
+    <title>Sign Up</title>
 </head>
 <body class="bg-dark-blue flex items-center justify-center h-screen">
     <div id="app"></div>
@@ -40,25 +43,13 @@
             const [email, setEmail] = React.useState('');
             const [message, setMessage] = React.useState('');
 
-            const validateRegistration = async (event) => {
+            const validateRegistration = (event) => {
                 event.preventDefault();
                 if (!username || !password || !email) {
                     setMessage('Complete Your Registration');
                 } else {
-                    const formData = new FormData();
-                    formData.append('username', username);
-                    formData.append('password', password);
-                    formData.append('email', email);
-
-                    const response = await fetch('register.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    const result = await response.text();
-                    setMessage('Check your email');
-                    // You can further process the response here if needed
-                    console.log(result);
+                    setMessage('Registered');
+                    event.target.submit();
                 }
             }
 
@@ -68,10 +59,11 @@
                         <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
                     </div>
                     <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
-                    <form onSubmit={validateRegistration}>
+                    <form action="adduser.php" method="post" onSubmit={validateRegistration}>
                         <div className="mb-4">
                             <input
                                 type="text"
+                                name="username"
                                 placeholder="Username"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={username}
@@ -81,6 +73,7 @@
                         <div className="mb-4">
                             <input
                                 type="password"
+                                name="password"
                                 placeholder="Password"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={password}
@@ -90,6 +83,7 @@
                         <div className="mb-4">
                             <input
                                 type="email"
+                                name="email"
                                 placeholder="Email"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={email}
