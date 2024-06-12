@@ -1,6 +1,6 @@
 Fitness Tracker is Fitness Tracker 
 application that allows users to
-track their fitness journey.
+track their fitness journey in real time.
 Fitness Tracker was created 
 with html css JavaScript,php 
 and phpmailer from the backend.
