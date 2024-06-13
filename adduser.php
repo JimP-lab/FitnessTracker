@@ -14,12 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'email' => $email
     ];
 
-    // Redirect to avoid resubmission
-    header('Location: adduser.php');
-    exit;
-} else {
-    // Display the credentials of registered users
-    echo "<h1>Registered Users</h1>";
+    // End the session and send success response
+    session_write_close();
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users</title>
+</head>
+<body>
+    <h1>Registered Users</h1>
+    <?php
     if (!empty($_SESSION['users'])) {
         echo "<ul>";
         foreach ($_SESSION['users'] as $user) {
@@ -29,5 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "No users registered yet.";
     }
-}
-?>
+    ?>
+</body>
+</html>
