@@ -43,13 +43,30 @@
             const [email, setEmail] = React.useState('');
             const [message, setMessage] = React.useState('');
 
-            const validateRegistration = (event) => {
+            const validateRegistration = async (event) => {
                 event.preventDefault();
                 if (!username || !password || !email) {
                     setMessage('Complete Your Registration');
                 } else {
-                    setMessage('Registered');
-                    event.target.submit();
+                    const formData = new FormData();
+                    formData.append('username', username);
+                    formData.append('password', password);
+                    formData.append('email', email);
+
+                    const response = await fetch('adduser.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        setMessage('Registered');
+                        setUsername('');
+                        setPassword('');
+                        setEmail('');
+                        setAgreeTerms(false);
+                    } else {
+                        setMessage('Registration Failed');
+                    }
                 }
             }
 
@@ -59,11 +76,10 @@
                         <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
                     </div>
                     <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
-                    <form action="adduser.php" method="post" onSubmit={validateRegistration}>
+                    <form onSubmit={validateRegistration}>
                         <div className="mb-4">
                             <input
                                 type="text"
-                                name="username"
                                 placeholder="Username"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={username}
@@ -73,7 +89,6 @@
                         <div className="mb-4">
                             <input
                                 type="password"
-                                name="password"
                                 placeholder="Password"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={password}
@@ -83,7 +98,6 @@
                         <div className="mb-4">
                             <input
                                 type="email"
-                                name="email"
                                 placeholder="Email"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={email}
@@ -95,6 +109,7 @@
                                 type="checkbox"
                                 id="terms"
                                 className="mr-2"
+                                checked={agreeTerms}
                                 onChange={() => setAgreeTerms(!agreeTerms)}
                             />
                             <label htmlFor="terms" className="text-sm text-gray-600">
