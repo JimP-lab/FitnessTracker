@@ -7,9 +7,6 @@ For the front end side was created with Screenshot to code,prompt engineering,Re
 The logo was created with
 leonardo.ai.
 The contact form was created with formpark.
-Fitness Tracker was deployed with GitHub pages.
-Here is the link to Fitness Tracker:
-https://jimp-lab.github.io/FitnessTracker/
 Here is the link to formspark.io: 
 https://formspark.io/ 
 Here is the link to GitHub pages:
