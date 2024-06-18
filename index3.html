@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Forgot Password</title>
     <script src="https://unpkg.com/react/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
@@ -8,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0fa6e2; /* Set the background to white */
-            font-family: 'Inter', sans-serif; /* Apply the Inter font */
+            background-color: #0fa6e2;
+            font-family: 'Inter', sans-serif;
         }
         #root {
             width: 100%;
@@ -26,12 +28,31 @@
     function App() {
         const [email, setEmail] = React.useState("");
         const [message, setMessage] = React.useState("");
+
         const sendEmailVerification = () => {
             if (!email) {
                 setMessage("Please enter your email.");
                 return;
             }
+
+            // Send a POST request to the PHP server
+            fetch('ResetPassword.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                setMessage(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setMessage("An error occurred. Please try again later.");
+            });
         };
+
         return (
             <div className="flex justify-center items-center h-screen">
                 <div className="bg-white p-6 rounded-3xl shadow-lg" style={{ width: '400px' }}>
