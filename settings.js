@@ -1,21 +1,3 @@
-function changeProfilePicture() {
-    const pictureInput = document.getElementById('pictureInput');
-    const profilePicture = document.getElementById('profilePicture');
-
-    if (pictureInput.files && pictureInput.files[0]) {
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            profilePicture.src = e.target.result;
-        };
-
-        reader.readAsDataURL(pictureInput.files[0]);
-
-        // Add your logic here to handle the added picture, e.g., save it to the server
-        // For demonstration, let's show an alert
-        alert('Profile picture changed');
-    }
-}
 function changePassword() {
     // Redirect user to the index1 file 
     window.location.href = "index1.html";
