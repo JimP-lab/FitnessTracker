@@ -16,7 +16,7 @@ function sendResetPassword($email) {
         $mail->Username = 'sfitnesstracker116@gmail.com';
         $mail->Password = 'whff cbnq qsbs veod';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 465;
+        $mail->Port = 587; // Changed to 587 to match the ENCRYPTION_STARTTLS setting
 
         $mail->setFrom('sfitnesstracker116@gmail.com', 'FitnessTracker');
         $mail->addAddress($email);
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($data['email'])) {
         $email = htmlspecialchars($data['email']);
         if (sendResetPassword($email)) {
-            echo "Check your email";
+            echo "Check your email.";
         } else {
             echo "Please try again later.";
         }
