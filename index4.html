@@ -31,7 +31,6 @@
             },
         }
     </script>
-    <title>Sign Up</title>
 </head>
 <body class="bg-dark-blue flex items-center justify-center h-screen">
     <div id="app"></div>
@@ -42,30 +41,29 @@
             const [password, setPassword] = React.useState('');
             const [email, setEmail] = React.useState('');
             const [message, setMessage] = React.useState('');
+            const [error, setError] = React.useState('');
 
-            const validateRegistration = async (event) => {
+            const handleSubmit = async (event) => {
                 event.preventDefault();
+
                 if (!username || !password || !email) {
-                    setMessage('Complete Your Registration');
-                } else {
-                    const formData = new FormData();
-                    formData.append('username', username);
-                    formData.append('password', password);
-                    formData.append('email', email);
-
-                    const response = await fetch('adduser.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (response.ok) {
-                        setMessage('Registered');
-                        setUsername('');
-                        setPassword('');
-                        setEmail('');
-                        setAgreeTerms(false);
-                    } 
+                    setError('Please enter your credentials.');
+                    return;
                 }
+
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+                formData.append('email', email);
+
+                const response = await fetch('database.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.text();
+                setMessage(result);
+                setError('');
             }
 
             return (
@@ -74,11 +72,12 @@
                         <img src="Logo/logo.png" alt="Fitness Tracker Logo" className="rounded-full h-50 w-40 mx-auto" />
                     </div>
                     <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
-                    <form onSubmit={validateRegistration}>
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-4">
                             <input
                                 type="text"
                                 placeholder="Username"
+                                name="username"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -88,6 +87,7 @@
                             <input
                                 type="password"
                                 placeholder="Password"
+                                name="password"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -97,6 +97,7 @@
                             <input
                                 type="email"
                                 placeholder="Email"
+                                name="email"
                                 className="w-full p-4 border border-gray-300 rounded-xl"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -107,7 +108,6 @@
                                 type="checkbox"
                                 id="terms"
                                 className="mr-2"
-                                checked={agreeTerms}
                                 onChange={() => setAgreeTerms(!agreeTerms)}
                             />
                             <label htmlFor="terms" className="text-sm text-gray-600">
@@ -122,7 +122,8 @@
                             Sign Up
                         </button>
                     </form>
-                    {message && <div className="text-center text-sm mt-4 text-red-500">{message}</div>}
+                    {error && <div className="text-center text-sm mt-4 text-red-500">{error}</div>}
+                    {message && <div className="text-center text-sm mt-4 text-green-500">{message}</div>}
                     <div className="text-center text-sm mt-4">
                         Already have an account? <a href="index.html" className="text-blue-600 hover:underline">Log In</a>
                     </div>
