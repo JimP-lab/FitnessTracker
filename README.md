@@ -10,5 +10,4 @@ Here is the link to formspark.io:
 https://formspark.io/ 
 Here is the link to screenshot to code: https://screenshottocode.com/
 Here is the link to leonardo.ai:
-https://leonardo.ai/
-https://fit25.000webhostapp.com/index1.html
+https://leonardo.ai/.
