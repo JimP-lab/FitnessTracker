@@ -1,7 +1,5 @@
-Fitness Tracker is an application that allows users to
-track their fitness journey in real time.
-Fitness Tracker was created 
-with html css JavaScript,php, prompt engineering and phpmailer from the backend side.
+Fitness Tracker is an application that allows users to track their fitness journey in real time.
+Fitness Tracker was created with html css JavaScript,php, prompt engineering and phpmailer from the backend side.
 For the front end side was created with Screenshot to code,prompt engineering,React and Taiwind.
 The logo was created with
 leonardo.ai.
