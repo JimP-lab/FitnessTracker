@@ -4,6 +4,8 @@ Fitness Tracker was created with html css JavaScript,php, prompt engineering and
 
 For the front end side was created with Screenshot to code,prompt engineering,React and Taiwind.
 
+Here is the fitness tracker:
+https://fitnesstracker.site/
 
 The logo was created with leonardo.ai.
 
