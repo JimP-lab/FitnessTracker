@@ -6,9 +6,9 @@ $password = $data['password'];
 
 // Database credentials
 $host = 'localhost';
-$dbname = 'your_database';
-$dbuser = 'your_username';
-$dbpass = 'your_password';
+$dbname = 'fit';
+$dbuser = 'root';
+$dbpass = '';
 
 try {
     // Create a new PDO instance
