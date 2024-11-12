@@ -1,10 +1,8 @@
 <?php
 $servername = 'localhost';
-$username = 'u879781544_Fit';
-$password = '8??60eZs';
-$dbname = 'u879781544_Fit_Tracker';
-
-
+$username = 'your_username';
+$password = 'your_password';
+$dbname = 'your_database';
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
