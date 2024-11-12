@@ -6,9 +6,9 @@ $username = $data['username'];
 
 // Database credentials
 $host = 'localhost';
-$dbname = 'u879781544_Fit_Tracker';
-$dbUsername = 'u879781544_Fit';
-$dbPassword = '8??60eZs';
+$dbname = 'your_database';
+$dbUsername = 'your_username';
+$dbPassword = 'your_password';
 
 // Connect to the database
 $mysqli = new mysqli($host, $dbUsername, $dbPassword, $dbname);
