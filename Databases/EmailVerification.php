@@ -5,9 +5,9 @@ $email = $data['email'];
 
 // Check if the email exists in the database
 $host = 'localhost';
-$dbname = 'your_database';
-$username = 'your_username';
-$password = 'your_password';
+$dbname = 'fit';
+$username = 'root';
+$password = '';
 
 // Create connection
 $mysqli = new mysqli($host, $username, $password, $dbname);
