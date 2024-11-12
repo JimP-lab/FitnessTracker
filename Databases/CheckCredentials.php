@@ -1,17 +1,13 @@
 <?php
 header('Content-Type: application/json');
-
 $data = json_decode(file_get_contents('php://input'), true);
 $username = $data['username'];
 $password = $data['password'];
-
 // Database credentials
 $host = 'localhost';
-$dbname = 'u879781544_Fit_Tracker';
-$dbuser = 'u879781544_Fit';
-$dbpass = '8??60eZs';
-
-
+$dbname = 'your_database';
+$dbuser = 'your_username';
+$dbpass = 'your_password';
 
 try {
     // Create a new PDO instance
