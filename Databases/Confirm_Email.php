@@ -44,7 +44,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     $stmt_update->execute();
 
                     // Redirect to the new home page with a confirmation message
-                    header("Location:https://fitnesstracker.site/index.html?registered=success");
+                    header("Location:index.html?registered=success");
                     exit();
                 } else {
                     echo "Error preparing update statement: " . $mysqli->error;
