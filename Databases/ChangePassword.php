@@ -1,9 +1,9 @@
 <?php
 // Database credentials
 $host = 'localhost';
-$dbname = 'your_database';
-$username = 'your_username';
-$password = 'your_password';
+$dbname = 'fit';
+$username = 'root';
+$password = '';
 
 // Get the posted data
 $data = json_decode(file_get_contents('php://input'), true);
