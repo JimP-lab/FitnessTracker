@@ -13,7 +13,7 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'sfitnesstracker116@gmail.com';
-    $mail->Password = 'whff cbnq qsbs veod'; // Consider using environment variables for security
+    $mail->Password = 'whff cbnq qsbs veod'; 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 } catch (Exception $e) {
