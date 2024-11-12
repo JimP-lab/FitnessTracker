@@ -6,9 +6,9 @@ $username = $data['username'];
 
 // Database credentials
 $host = 'localhost';
-$dbname = 'your_database';
-$dbUsername = 'your_username';
-$dbPassword = 'your_password';
+$dbname = 'fit';
+$dbUsername = 'root';
+$dbPassword = '';
 
 // Connect to the database
 $mysqli = new mysqli($host, $dbUsername, $dbPassword, $dbname);
