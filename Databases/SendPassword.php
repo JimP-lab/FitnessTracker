@@ -86,7 +86,7 @@ if ($stmt->num_rows > 0) {
     <h1>Password Reset</h1>
     <p>Click the button below to Reset Your Password</p>
     <!-- Button to reset password -->
-     <a href="https://fitnesstracker.site/ResetPassword.html" class="button" target="_blank">Reset Your Password</a>
+     <a href="ResetPassword.html" class="button" target="_blank">Reset Your Password</a>
     <p>Regards<br>Jim<br> Fitness Tracker Founder</p>
     <p class="footer">© 2024 Fitness Tracker. All rights reserved.</p>
     </div>
