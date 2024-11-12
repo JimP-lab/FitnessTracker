@@ -100,7 +100,7 @@ if ($stmt->num_rows > 0) {
                 <h1>Confirm Email Address</h1>
                 <p>Click the button below to confirm your email address</p>
                 <!-- Button to confirm email address --> 
-            <a href="https://fitnesstracker.site/Confirm_Email.php?token=' . $token . '" class="button" target="_blank">Confirm Email Address</a>
+            <a href="Confirm_Email.php?token=' . $token . '" class="button" target="_blank">Confirm Email Address</a>
                 <p>Regards<br>Jim<br>Fitness Tracker Founder</p>
                 <p class="footer">© 2024 Fitness Tracker. All rights reserved.</p>
             </div>
