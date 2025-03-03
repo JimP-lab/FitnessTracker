@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 // Database connection parameters
 $host = 'localhost';
-$dbname = 'fit;
+$dbname = 'fit';
 $username = 'jim';
 $password = '';
 
