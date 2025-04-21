@@ -9,9 +9,9 @@ $password = $data['password'];
 
 // Database credentials
 $host = 'localhost';
-$dbname = 'u879781544_Fit_Tracker';
-$dbuser = 'u879781544_Fit';
-$dbpass = '8??60eZs';
+$dbname = 'fitness tracker';
+$dbuser = 'fit';
+$dbpass = '';
 
 try {
     // Create a new PDO instance
