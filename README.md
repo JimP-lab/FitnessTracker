@@ -9,6 +9,12 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 - **Logo:** Created with the assistance of [leonardo.ai](https://leonardo.ai).
 - **Contact Form:** Integrated using [Formspark](https://formspark.io) for efficient user feedback and inquiries.
 
+### **User Statistics**
+
+| **Metrics**         | **Count** |
+|---------------------|-----------|
+| **Total Users**     | 17     |
+
 ### Explore Fitness Tracker
 
 Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tracker](https://fitnesstracker.site/).
