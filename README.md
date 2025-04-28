@@ -28,4 +28,3 @@ Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tra
 - [Formspark](https://formspark.io/)
 - [Screenshot to Code](https://screenshottocode.com/)
 - [leonardo.ai](https://leonardo.ai/)
-- [How to delete users from users table](https://app.guidde.com/share/playbooks/pCJ4MdxcCZ9PAyb6NYhfcA?origin=R1O4e6VvMcVWkQK16ZqwMelHWQN2)
