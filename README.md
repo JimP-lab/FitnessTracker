@@ -1,6 +1,6 @@
 ## Fitness Tracker
 
-Fitness Tracker is a comprehensive application designed to help users monitor their fitness journey in real-time. It offers an intuitive interface and robust features to ensure users can effectively track their progress and achieve their fitness goals.
+Fitness Tracker is a comprehensive application designed to help users monitor their fitness journey in real-time.
 
 ### Features and Technologies
 
