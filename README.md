@@ -5,7 +5,7 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 ### Features and Technologies
 
 - **Frontend:** Developed using Screenshot to Code, prompt engineering, React, and Tailwind CSS to deliver a seamless user experience.
-- **Backend:** Built with HTML, CSS, JavaScript, PHP, prompt engineering, and PHPMailer to ensure reliable performance and secure communication.
+- **Backend:** Built with HTML, CSS, JavaScript, PHP, and PHPMailer to ensure reliable performance and secure communication.
 - **Logo:** Created with the assistance of [leonardo.ai](https://leonardo.ai).
 - **Contact Form:** Integrated using [Formspark](https://formspark.io) for efficient user feedback and inquiries.
 
