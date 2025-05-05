@@ -28,3 +28,8 @@ Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tra
 - [Formspark](https://formspark.io/)
 - [Screenshot to Code](https://screenshottocode.com/)
 - [leonardo.ai](https://leonardo.ai/)
+
+### Screenshots Of The App ###
+
+- Login Page -
+![Screenshot 2025-04-30 at 19-50-44 Fitness Tracker](https://github.com/user-attachments/assets/e1ae010a-b6af-4106-b17e-0926044b0059)
