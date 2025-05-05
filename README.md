@@ -31,5 +31,36 @@ Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tra
 
 ### Screenshots Of The App ###
 
-- Login Page -
+## Login Page ##  
+ 
 ![Screenshot 2025-04-30 at 19-50-44 Fitness Tracker](https://github.com/user-attachments/assets/e1ae010a-b6af-4106-b17e-0926044b0059)
+
+
+## Login Page Effect ## 
+![Screenshot 2025-04-30 at 19-51-29 Fitness Tracker](https://github.com/user-attachments/assets/35050b78-9d0f-4f32-b5e1-14c7c97269ea)
+
+ ## Sigh Up Page ##
+
+![Screenshot 2025-04-30 at 19-51-54 ](https://github.com/user-attachments/assets/527c954c-ddd1-47e2-adaa-197ff12bb531)
+
+## Terms and Conditions ## 
+
+![Screenshot 2025-04-30 at 19-52-13 Terms and Conditions](https://github.com/user-attachments/assets/a8a35ff5-a902-4b3e-9cd6-5c6be30e2bd0)
+
+## Privacy and Policy ##
+
+![Screenshot 2025-04-30 at 19-52-30 Privacy Policy](https://github.com/user-attachments/assets/71057e22-8297-44c9-830b-e8881ad791fd)
+
+## Tracking Section ## 
+
+![Screenshot 2025-04-30 at 19-53-04 Fitness Tracker](https://github.com/user-attachments/assets/cad03bd9-2a87-42f5-81a3-4b568f4b4db7)
+
+## Profile Section ## 
+
+![Screenshot 2025-04-30 at 19-54-44 Fitness Tracker](https://github.com/user-attachments/assets/76e9de3b-28ee-43fd-a2ad-282112be1eac)
+
+## Contact Us ## 
+
+![Screenshot 2025-04-30 at 19-55-27 Contact Us](https://github.com/user-attachments/assets/8301ed7f-d3bd-472e-9952-4aec78d5e890)
+
+
