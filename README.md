@@ -29,17 +29,18 @@ Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tra
 - [Screenshot to Code](https://screenshottocode.com/)
 - [leonardo.ai](https://leonardo.ai/)
 
-### Screenshots Of The App ###
+### Images Of The App ###
 
 ## Login Page ##  
  
 ![Screenshot 2025-04-30 at 19-50-44 Fitness Tracker](https://github.com/user-attachments/assets/e1ae010a-b6af-4106-b17e-0926044b0059)
 
 
-## Login Page Effect ## 
+## Login Page Effect ##   
+
 ![Screenshot 2025-04-30 at 19-51-29 Fitness Tracker](https://github.com/user-attachments/assets/35050b78-9d0f-4f32-b5e1-14c7c97269ea)
 
- ## Sigh Up Page ##
+ ## Sign Up Page ##
 
 ![Screenshot 2025-04-30 at 19-51-54 ](https://github.com/user-attachments/assets/527c954c-ddd1-47e2-adaa-197ff12bb531)
 
