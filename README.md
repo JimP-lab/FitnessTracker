@@ -61,6 +61,7 @@ Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tra
 ![Screenshot 2025-04-30 at 19-54-44 Fitness Tracker](https://github.com/user-attachments/assets/76e9de3b-28ee-43fd-a2ad-282112be1eac)
 
 ## Profile Information ## 
+
 ![εικόνα](https://github.com/user-attachments/assets/3628549b-9552-4797-ab21-b869e76e29b8)
 
 ## Contact Us ## 
