@@ -15,7 +15,7 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 
 | **Metric**         | **Count** |
 |---------------------|-----------|
-| **Total Users**     | 17        |
+| **Total Users**     | 19       |
 
 </div>
 
