@@ -137,7 +137,7 @@
                 }
 
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://submit-form");
+                xhr.open("POST", "contact_handler.php");
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.setRequestHeader("Accept", "application/json");
 
@@ -148,17 +148,22 @@
                 };
 
                 xhr.onload = () => {
-                    if (xhr.status === 200) {
-                        this.setState({ showSuccessMessage: true });
-                        alert("Your message has been sent");
-                        event.target.reset();
-                    } else {
-                        alert("There was an error sending your message.");
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (xhr.status === 200 && response.success) {
+                            this.setState({ showSuccessMessage: true });
+                            alert("Your message has been sent successfully! We'll get back to you soon.");
+                            event.target.reset();
+                        } else {
+                            alert(response.error || "There was an error sending your message. Please try again.");
+                        }
+                    } catch (e) {
+                        alert("There was an error processing your request. Please try again.");
                     }
                 };
 
                 xhr.onerror = () => {
-                    alert("There was an error sending your message");
+                    alert("Network error. Please check your connection and try again.");
                 };
 
                 xhr.send(JSON.stringify(formData));
@@ -173,11 +178,11 @@
                         <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
                         <form className="vertical-form" onSubmit={this.handleSubmit}>
                             <label htmlFor="first-name">First name</label>
-                            <input id="first-name" name="first-name" type="text" />
+                            <input id="first-name" name="first-name" type="text" required />
                             <label htmlFor="last-name">Last name</label>
-                            <input id="last-name" name="last-name" type="text" />
+                            <input id="last-name" name="last-name" type="text" required />
                             <label htmlFor="Email">Email</label>
-                            <input id="Email" name="Email" type="text" />
+                            <input id="Email" name="Email" type="email" required />
                             <label htmlFor="message">Message</label>
                             <textarea id="message" name="message" cols="15" rows="5"></textarea>
                             <button id="submit-btn" type="submit">Submit</button>
