@@ -6,13 +6,14 @@
     <title>Profile Settings</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", () => {
+            const uid = getCurrentUserId();
             const username = getCurrentUsername();
-            if (!username) {
-                console.warn("Username not found in URL or storage, profile data cannot be loaded.");
+            if (!uid && !username) {
+                console.warn('User not identified – profile cannot load.');
             } else {
-                clearForm(); // Clear form before loading new data
-                fetchUserData(username);
+                clearForm();
+                fetchUserData(username, uid);
             }
         });
 
@@ -32,11 +33,31 @@
             return localStorage.getItem('currentUsername') || '';
         }
 
+        function getCurrentUserId() {
+            const qs = new URLSearchParams(window.location.search);
+            if (qs.has('id')) {
+                const idVal = parseInt(qs.get('id'));
+                if (!isNaN(idVal)) {
+                    localStorage.setItem('currentUserId', idVal);
+                    return idVal;
+                }
+            }
+            const stored = localStorage.getItem('currentUserId');
+            return stored ? parseInt(stored) : 0;
+        }
+
         // -----------------------------
         // READ (GET) profile data
         // -----------------------------
-        function fetchUserData(username) {
-            fetch(`profile_update.php?username=${encodeURIComponent(username)}`)
+        function fetchUserData(username, uid = 0) {
+            let url = 'profile_update.php?';
+            if (uid) {
+                url += `id=${uid}`;
+            } else {
+                url += `username=${encodeURIComponent(username)}`;
+            }
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
@@ -45,6 +66,9 @@
                         document.querySelector("input[name='password']").value = ""; // Keep password field empty
                         if (user.profile_image) {
                             document.getElementById("profilePreview").src = `data:image/jpeg;base64,${user.profile_image}`;
+                        }
+                        if (user.id) {
+                            localStorage.setItem('currentUserId', user.id);
                         }
                     } else {
                         console.log("No profile information found.");
@@ -68,14 +92,15 @@
         function updateProfile(event) {
             event.preventDefault();
             const username = getCurrentUsername();
-            if (!username) {
-                alert('Username not found; cannot update profile.');
+            const uid = getCurrentUserId();
+            if (!uid && !username) {
+                alert('User not identified; cannot update profile.');
                 return;
             }
 
-            const formEl = document.getElementById("profileForm");
-            const formData = new FormData(formEl);
-            formData.set('username', username); // ensure username is sent even if field was edited
+            const formData = new FormData(document.getElementById('profileForm'));
+            if (username) formData.set('username', username);
+            if (uid) formData.set('id', uid);
 
             fetch("profile_update.php", {
                 method: "POST",
@@ -86,7 +111,7 @@
                     const messageDiv = document.getElementById("updateMessage");
                     if (data.status === "success") {
                         messageDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                        fetchUserData(username); // Reload updated data
+                        fetchUserData(username, uid); // Reload updated data
                     } else {
                         messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
                     }

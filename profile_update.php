@@ -22,18 +22,30 @@ try {
     // 1) FETCH USER INFORMATION (GET REQUEST)
     // -------------------------------------------------------------------------
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        // Check that the username parameter is present
-        if (!isset($_GET['username']) || empty(trim($_GET['username']))) {
+        $requestedId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $requestedUsername = isset($_GET['username']) ? trim($_GET['username']) : '';
+
+        if (!$requestedId && $requestedUsername === '') {
             http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Username is required']);
+            echo json_encode(['status' => 'error', 'message' => 'id or username is required']);
             exit;
         }
 
-        $requestedUsername = trim($_GET['username']);
-
-        // Fetch profile details for the specified user
-        $stmt = $pdo->prepare("SELECT id, username, profile_image FROM user_information WHERE username = :username");
-        $stmt->bindParam(':username', $requestedUsername);
+        if ($requestedId) {
+            $stmt = $pdo->prepare(
+                "SELECT id, username, profile_image
+                 FROM user_information
+                 WHERE id = :id"
+            );
+            $stmt->bindParam(':id', $requestedId, PDO::PARAM_INT);
+        } else {
+            $stmt = $pdo->prepare(
+                "SELECT id, username, profile_image
+                 FROM user_information
+                 WHERE username = :username"
+            );
+            $stmt->bindParam(':username', $requestedUsername);
+        }
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -57,6 +69,7 @@ try {
         We keep the original logic but add some basic validation and make sure
         the incoming fields are fetched safely even if they are missing.
         */
+        $user_id            = isset($_POST['id']) ? intval($_POST['id']) : 0;
         $new_username       = isset($_POST['username']) ? trim($_POST['username']) : '';
         $new_password       = isset($_POST['password']) ? trim($_POST['password']) : '';
         $profile_image_data = null;
@@ -69,34 +82,63 @@ try {
         // Hash the new password only if it's provided
         $hashed_password = !empty($new_password) ? password_hash($new_password, PASSWORD_DEFAULT) : null;
 
-        // Username must be provided in the form submission
-        if (empty($new_username)) {
+        if (!$user_id && $new_username === '') {
             http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Username is required']);
+            echo json_encode(['status' => 'error', 'message' => 'id or username is required']);
             exit;
         }
 
-        $query = "UPDATE user_information SET username = :username";
+        $setParts = [];
+        if ($new_username !== '') {
+            $setParts[] = 'username = :username';
+        }
         if ($hashed_password) {
-            $query .= ", password = :password";
+            $setParts[] = 'password = :password';
         }
-        if ($profile_image_data) {
-            $query .= ", profile_image = :profile_image";
+        if ($profile_image_data !== null) {
+            $setParts[] = 'profile_image = :profile_image';
         }
-        $stmt = $pdo->prepare($query . " WHERE username = :username_where");
-        $stmt->bindParam(':username', $new_username);
+
+        if (empty($setParts)) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'No fields to update']);
+            exit;
+        }
+
+        $query = 'UPDATE user_information SET ' . implode(', ', $setParts);
+        if ($user_id) {
+            $query .= ' WHERE id = :id';
+        } else {
+            $query .= ' WHERE username = :username_where';
+        }
+
+        $stmt = $pdo->prepare($query);
+
+        if ($new_username !== '') {
+            $stmt->bindParam(':username', $new_username);
+        }
         if ($hashed_password) {
             $stmt->bindParam(':password', $hashed_password);
         }
-        if ($profile_image_data) {
+        if ($profile_image_data !== null) {
             $stmt->bindParam(':profile_image', $profile_image_data, PDO::PARAM_LOB);
         }
-        $stmt->bindParam(':username_where', $new_username);
+        if ($user_id) {
+            $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        } else {
+            $stmt->bindParam(':username_where', $new_username);
+        }
+
         $stmt->execute();
 
-        // Retrieve the updated info to send back to the UI
-        $refreshStmt = $pdo->prepare("SELECT id, username, profile_image FROM user_information WHERE username = :username");
-        $refreshStmt->bindParam(':username', $new_username);
+        // Retrieve the updated info to send back to UI
+        if ($user_id) {
+            $refreshStmt = $pdo->prepare('SELECT id, username, profile_image FROM user_information WHERE id = :id');
+            $refreshStmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        } else {
+            $refreshStmt = $pdo->prepare('SELECT id, username, profile_image FROM user_information WHERE username = :username');
+            $refreshStmt->bindParam(':username', $new_username);
+        }
         $refreshStmt->execute();
         $updatedUser = $refreshStmt->fetch(PDO::FETCH_ASSOC);
 
