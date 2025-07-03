@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <script src="https://unpkg.com/react/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-      <link rel="icon" href="Logo/logo.png" type="image/png">
+    <link rel="icon" href="Logo/logo.png" type="image/png">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -137,7 +137,7 @@
                 }
 
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://submit-form.com/your-form-id");
+                xhr.open("POST", "https://submit-form.com/GE0q3MfKx");
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.setRequestHeader("Accept", "application/json");
 
@@ -150,20 +150,15 @@
                 xhr.onload = () => {
                     if (xhr.status === 200) {
                         this.setState({ showSuccessMessage: true });
-                        alert("Your message has been sent successfully! We'll get back to you soon.");
+                        alert("Your message has been sent");
                         event.target.reset();
                     } else {
-                        try {
-                            const response = JSON.parse(xhr.responseText);
-                            alert(response.error || "There was an error sending your message. Please try again.");
-                        } catch (e) {
-                            alert("There was an error sending your message. Please try again.");
-                        }
+                        alert("There was an error sending your message.");
                     }
                 };
 
                 xhr.onerror = () => {
-                    alert("Network error. Please check your connection and try again.");
+                    alert("There was an error sending your message");
                 };
 
                 xhr.send(JSON.stringify(formData));
@@ -178,13 +173,13 @@
                         <h2 className="text-2xl font-semibold text-center mb-8">Track Your Journey With Ease</h2>
                         <form className="vertical-form" onSubmit={this.handleSubmit}>
                             <label htmlFor="first-name">First name</label>
-                            <input id="first-name" name="first-name" type="text" required />
+                            <input id="first-name" name="first-name" type="text" />
                             <label htmlFor="last-name">Last name</label>
-                            <input id="last-name" name="last-name" type="text" required />
+                            <input id="last-name" name="last-name" type="text" />
                             <label htmlFor="Email">Email</label>
-                            <input id="Email" name="Email" type="email" required />
+                            <input id="Email" name="Email" type="text" />
                             <label htmlFor="message">Message</label>
-                            <textarea id="message" name="message" cols="15" rows="5" required></textarea>
+                            <textarea id="message" name="message" cols="15" rows="5"></textarea>
                             <button id="submit-btn" type="submit">Submit</button>
                         </form>
                     </div>
