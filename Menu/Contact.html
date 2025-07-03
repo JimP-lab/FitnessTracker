@@ -137,7 +137,7 @@
                 }
 
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "contact_handler.php");
+                xhr.open("POST", "https://submit-form.com/your-form-id");
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.setRequestHeader("Accept", "application/json");
 
@@ -148,17 +148,17 @@
                 };
 
                 xhr.onload = () => {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-                        if (xhr.status === 200 && response.success) {
-                            this.setState({ showSuccessMessage: true });
-                            alert("Your message has been sent successfully! We'll get back to you soon.");
-                            event.target.reset();
-                        } else {
+                    if (xhr.status === 200) {
+                        this.setState({ showSuccessMessage: true });
+                        alert("Your message has been sent successfully! We'll get back to you soon.");
+                        event.target.reset();
+                    } else {
+                        try {
+                            const response = JSON.parse(xhr.responseText);
                             alert(response.error || "There was an error sending your message. Please try again.");
+                        } catch (e) {
+                            alert("There was an error sending your message. Please try again.");
                         }
-                    } catch (e) {
-                        alert("There was an error processing your request. Please try again.");
                     }
                 };
 
@@ -184,7 +184,7 @@
                             <label htmlFor="Email">Email</label>
                             <input id="Email" name="Email" type="email" required />
                             <label htmlFor="message">Message</label>
-                            <textarea id="message" name="message" cols="15" rows="5"></textarea>
+                            <textarea id="message" name="message" cols="15" rows="5" required></textarea>
                             <button id="submit-btn" type="submit">Submit</button>
                         </form>
                     </div>
