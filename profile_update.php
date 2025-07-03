@@ -131,6 +131,48 @@ try {
 
         $stmt->execute();
 
+        // If no row was updated (new user without profile row yet) -> insert instead
+        if ($stmt->rowCount() === 0) {
+            // Build dynamic INSERT
+            $cols = [];
+            $placeholders = [];
+            if ($user_id) {
+                $cols[] = 'id';
+                $placeholders[] = ':id_ins';
+            }
+            if ($new_username !== '') {
+                $cols[] = 'username';
+                $placeholders[] = ':username_ins';
+            }
+            if ($hashed_password) {
+                $cols[] = 'password';
+                $placeholders[] = ':password_ins';
+            }
+            if ($profile_image_data !== null) {
+                $cols[] = 'profile_image';
+                $placeholders[] = ':profile_image_ins';
+            }
+
+            if (!$cols) {
+                http_response_code(400);
+                echo json_encode(['status'=>'error','message'=>'No data to insert']);
+                exit;
+            }
+
+            $insertSql = 'INSERT INTO user_information (' . implode(', ', $cols) . ') VALUES (' . implode(', ', $placeholders) . ')';
+            $ins = $pdo->prepare($insertSql);
+            if ($user_id)           $ins->bindParam(':id_ins', $user_id, PDO::PARAM_INT);
+            if ($new_username !== '') $ins->bindParam(':username_ins', $new_username);
+            if ($hashed_password)     $ins->bindParam(':password_ins', $hashed_password);
+            if ($profile_image_data !== null) $ins->bindParam(':profile_image_ins', $profile_image_data, PDO::PARAM_LOB);
+            $ins->execute();
+
+            // for subsequent select use newly inserted id/username
+            if (!$user_id) {
+                $user_id = (int)$pdo->lastInsertId();
+            }
+        }
+
         // Retrieve the updated info to send back to UI
         if ($user_id) {
             $refreshStmt = $pdo->prepare('SELECT id, username, profile_image FROM user_information WHERE id = :id');

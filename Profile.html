@@ -71,7 +71,8 @@
                             localStorage.setItem('currentUserId', user.id);
                         }
                     } else {
-                        console.log("No profile information found.");
+                        // No record yet – show cached username if any
+                        document.querySelector('[name=username]').value = username;
                     }
                 })
                 .catch(error => console.error("Error fetching user data:", error));
