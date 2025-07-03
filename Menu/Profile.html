@@ -65,7 +65,8 @@
         // Fetch and populate existing profile data once the page loads
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch('profile_update.php');
+                const usernameParam = window.currentUserName || '';
+                const response = await fetch(`../profile_update.php?username=${encodeURIComponent(usernameParam)}`);
                 const result   = await response.json();
 
                 if (result.status === 'success') {
@@ -86,7 +87,7 @@
         document.getElementById('profile-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData();
-            formData.append('username', document.getElementById('username').value);
+            formData.append('username', window.currentUserName || document.getElementById('username').value);
             formData.append('password', document.getElementById('password').value);
 
             const imageInput = document.getElementById('image-input');
@@ -95,7 +96,7 @@
             }
 
             try {
-                const response = await fetch('profile_update.php', {
+                const response = await fetch('../profile_update.php', {
                     method: 'POST',
                     body: formData
                 });
