@@ -8,9 +8,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const uid = getCurrentUserId();
-            const username = getCurrentUsername();
+            let username = getCurrentUsername();
+            
             if (!uid && !username) {
-                console.warn('User not identified – profile cannot load.');
+                // Try to get username from session as fallback
+                getUsernameFromSession().then(sessionUsername => {
+                    if (sessionUsername) {
+                        username = sessionUsername;
+                        clearForm();
+                        fetchUserData(username, 0);
+                    } else {
+                        console.warn('User not identified – profile cannot load.');
+                        // Show form anyway so user can enter their info
+                        clearForm();
+                    }
+                });
             } else {
                 clearForm();
                 fetchUserData(username, uid);
@@ -24,58 +36,101 @@
          *   2. localStorage item (set after login)
          */
         function getCurrentUsername() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.has('username')) {
-                const u = params.get('username');
-                localStorage.setItem('currentUsername', u); // Cache for future visits
+            console.log('getCurrentUsername called');
+            // Try multiple sources in order of preference
+            // 1. URL parameter
+            const qs = new URLSearchParams(window.location.search);
+            if (qs.has('username')) {
+                const u = qs.get('username');
+                console.log('Found username in URL:', u);
+                localStorage.setItem('currentUsername', u);
                 return u;
             }
-            return localStorage.getItem('currentUsername') || '';
+            
+            // 2. Global variable set by dashboard (window.currentUserName)
+            if (window.currentUserName) {
+                console.log('Found username in window.currentUserName:', window.currentUserName);
+                localStorage.setItem('currentUsername', window.currentUserName);
+                return window.currentUserName;
+            }
+            
+            // 3. LocalStorage cache
+            const cached = localStorage.getItem('currentUsername') || '';
+            console.log('Found username in localStorage:', cached);
+            return cached;
         }
 
         function getCurrentUserId() {
+            console.log('getCurrentUserId called');
+            // 1. URL parameter
             const qs = new URLSearchParams(window.location.search);
             if (qs.has('id')) {
-                const idVal = parseInt(qs.get('id'));
-                if (!isNaN(idVal)) {
-                    localStorage.setItem('currentUserId', idVal);
-                    return idVal;
+                const id = parseInt(qs.get('id'));
+                if (!isNaN(id)) {
+                    console.log('Found id in URL:', id);
+                    localStorage.setItem('currentUserId', id);
+                    return id;
                 }
             }
-            const stored = localStorage.getItem('currentUserId');
-            return stored ? parseInt(stored) : 0;
+            
+            // 2. LocalStorage cache
+            const cached = localStorage.getItem('currentUserId');
+            const result = cached ? parseInt(cached) : 0;
+            console.log('Found id in localStorage:', result);
+            return result;
+        }
+
+        // Additional helper to get username from session if available
+        async function getUsernameFromSession() {
+            try {
+                const response = await fetch('get_session_user.php');
+                const data = await response.json();
+                if (data.status === 'success' && data.username) {
+                    localStorage.setItem('currentUsername', data.username);
+                    return data.username;
+                }
+            } catch (e) {
+                console.log('Session check failed, continuing with other methods');
+            }
+            return '';
         }
 
         // -----------------------------
         // READ (GET) profile data
         // -----------------------------
         function fetchUserData(username, uid = 0) {
-            let url = 'profile_update.php?';
-            if (uid) {
-                url += `id=${uid}`;
-            } else {
-                url += `username=${encodeURIComponent(username)}`;
+            console.log('fetchUserData called with:', { username, uid });
+            
+            if (!username && !uid) {
+                console.log('No username or uid provided, skipping fetch');
+                return;
             }
+            
+            let url = 'profile_update.php?';
+            url += uid ? `id=${uid}` : `username=${encodeURIComponent(username)}`;
+
+            console.log('Fetching from URL:', url);
 
             fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        const user = data.user;
-                        document.querySelector("input[name='username']").value = user.username;
-                        document.querySelector("input[name='password']").value = ""; // Keep password field empty
-                        if (user.profile_image) {
-                            document.getElementById("profilePreview").src = `data:image/jpeg;base64,${user.profile_image}`;
-                        }
-                        if (user.id) {
-                            localStorage.setItem('currentUserId', user.id);
-                        }
-                    } else {
-                        // No record yet – show cached username if any
-                        document.querySelector('[name=username]').value = username;
-                    }
-                })
-                .catch(error => console.error("Error fetching user data:", error));
+              .then(r => r.json())
+              .then(data => {
+                  console.log('Profile fetch response:', data);
+                  if (data.status === "success") {
+                      const u = data.user;
+                      document.querySelector('[name=username]').value = u.username;
+                      document.querySelector('[name=password]').value = '';
+                      if (u.profile_image) {
+                          document.getElementById('profilePreview').src =
+                              `data:image/jpeg;base64,${u.profile_image}`;
+                      }
+                      if (u.id) localStorage.setItem('currentUserId', u.id);
+                  } else {
+                      /* first-time user – prefill cached username */
+                      console.log('No profile found, using username:', username);
+                      document.querySelector('[name=username]').value = username;
+                  }
+              })
+              .catch(err => console.error('Error fetching profile:', err));
         }
 
         // Preview selected image client-side
@@ -90,34 +145,42 @@
         // -----------------------------
         // UPDATE (POST) profile data
         // -----------------------------
-        function updateProfile(event) {
-            event.preventDefault();
-            const username = getCurrentUsername();
-            const uid = getCurrentUserId();
+        function updateProfile(e) {
+            e.preventDefault();
+            let uid      = getCurrentUserId();
+            let username = getCurrentUsername();
+            
+            const performUpdate = (username, uid) => {
+                const fd = new FormData(document.getElementById('profileForm'));
+                if (username) fd.set('username', username);
+                if (uid)      fd.set('id', uid);
+
+                fetch('profile_update.php', { method:'POST', body:fd })
+                  .then(r => r.json())
+                  .then(data => {
+                      const msg = document.getElementById('updateMessage');
+                      if (data.status === 'success') {
+                          msg.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                          fetchUserData(username, uid);  // refresh
+                      } else {
+                          msg.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+                      }
+                  })
+                  .catch(err => console.error('Error updating profile:', err));
+            };
+            
             if (!uid && !username) {
-                alert('User not identified; cannot update profile.');
-                return;
-            }
-
-            const formData = new FormData(document.getElementById('profileForm'));
-            if (username) formData.set('username', username);
-            if (uid) formData.set('id', uid);
-
-            fetch("profile_update.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const messageDiv = document.getElementById("updateMessage");
-                    if (data.status === "success") {
-                        messageDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                        fetchUserData(username, uid); // Reload updated data
+                // Try session as last resort
+                getUsernameFromSession().then(sessionUsername => {
+                    if (sessionUsername) {
+                        performUpdate(sessionUsername, 0);
                     } else {
-                        messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+                        alert('User not identified; cannot update profile.');
                     }
-                })
-                .catch(error => console.error("Error updating profile:", error));
+                });
+            } else {
+                performUpdate(username, uid);
+            }
         }
 
         function clearForm() {
