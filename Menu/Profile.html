@@ -29,14 +29,14 @@
         </div>
 
         <!-- Profile Form Section -->
-        <form class="profile-form">
+        <form class="profile-form" id="profile-form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username">
+                <input type="text" id="username" name="username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password">
+                <input type="password" id="password" name="password">
             </div>
             <button type="submit" class="save-button">Save</button>
         </form>
@@ -61,6 +61,56 @@
             const output = document.getElementById('profile-img');
             output.src = "default-profile.png"; // Set a default image or a blank image
         }
+
+        // Fetch and populate existing profile data once the page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('profile_update.php');
+                const result   = await response.json();
+
+                if (result.status === 'success') {
+                    const user = result.user;
+                    // Populate the form fields
+                    document.getElementById('username').value = user.username || '';
+                    // Profile image
+                    if (user.profile_image) {
+                        document.getElementById('profile-img').src = `data:image/jpeg;base64,${user.profile_image}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Could not fetch profile:', error);
+            }
+        });
+
+        // Handle form submission (Save button)
+        document.getElementById('profile-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('username', document.getElementById('username').value);
+            formData.append('password', document.getElementById('password').value);
+
+            const imageInput = document.getElementById('image-input');
+            if (imageInput && imageInput.files && imageInput.files.length > 0) {
+                formData.append('profile_image', imageInput.files[0]);
+            }
+
+            try {
+                const response = await fetch('profile_update.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                alert(result.message || 'Profile updated');
+
+                if (result.status === 'success') {
+                    // Refresh data so UI shows latest info
+                    window.location.reload();
+                }
+            } catch (error) {
+                alert('An error occurred while saving your profile.');
+                console.error('Save profile error:', error);
+            }
+        });
     </script>
 </body>
 </html>
