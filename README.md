@@ -19,9 +19,6 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 
 </div>
 
-### Explore Fitness Tracker
-
-Experience the full capabilities of the Fitness Tracker by visiting [Fitness Tracker](https://fitnesstracker.site/).
 
 ### Additional Resources
 
