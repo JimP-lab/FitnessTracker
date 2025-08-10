@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -18,8 +19,7 @@
   <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+    rel="stylesheet"/>
 
   <!-- Favicon -->
   <link rel="icon" href="Logo/logo.png" type="image/png" />
@@ -56,7 +56,7 @@
       },
     };
   </script>
-
+  
   <!-- Additional Styling -->
   <style>
     body {
@@ -409,7 +409,7 @@ xmlns="http://www.w3.org/2000/svg">
           break;
       }
     }
-
+    
     function loadMetrics(username) {
       const tableBody = document.getElementById('metrics-tbody');
       
@@ -500,7 +500,32 @@ xmlns="http://www.w3.org/2000/svg">
         document.getElementById('sleep-duration').value = '';
       }
     });
+    
+    
+    
+      function loadUserInfo(username) {
+      fetch(`profile_update.php?username=${encodeURIComponent(username)}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((userInfo) => {
+          if (userInfo.username) {
+            document.getElementById("username-display").textContent = userInfo.username;
+            document.getElementById("username").value = userInfo.username;
+            document.getElementById("profile-img").src = userInfo.profile_picture || "profile-picture.jpg";
+          } else {
+            console.error("User info not found");
+          }
+        })
+        .catch((error) => {
+          console.error("Error loading user info:", error);
+        });
+    }
 
+    
     // Additional utility functions
     function deleteAccount() {
       const confirmed = confirm("Do You Want To Delete Your Account?");
