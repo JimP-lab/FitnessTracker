@@ -1,9 +1,9 @@
 <?php
 // Database credentials
 $host = 'localhost';
-$dbname = 'u879781544_Fit_Tracker';
-$username = 'u879781544_Fit';
-$password = '8??60eZs';
+$dbname = 'fitness tracker';
+$username = 'fit';
+$password = '122';
 
 // Get the posted data
 $data = json_decode(file_get_contents('php://input'), true);
