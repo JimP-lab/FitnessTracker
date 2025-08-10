@@ -1,18 +1,22 @@
 
+
 function EditProfile() {
     // Redirect user to the index1 file 
     window.location.href = "Profile.html";
-}
-
-function changePassword() {
-    // Redirect user to the index1 file 
-    window.location.href = "Change.html";
 }
 
 function contactSupport() {
     // Add logic to redirect to email for support
     window.location.href = "Contact.html";
 }
+
+
+function changePassword() {
+    // Redirect user to the index1 file 
+    window.location.href = "Change.html";
+}
+
+
 function logout() {
     const confirmLogout = confirm('Do you want to log out?');
 
@@ -24,4 +28,4 @@ function logout() {
     } else {
         // User clicked "No", do nothing or perform additional actions as needed
     }
-}
+}  
