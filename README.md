@@ -51,7 +51,7 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 
 ## Tracking Section ## 
 
-![Screenshot 2025-04-30 at 19-53-04 Fitness Tracker](https://github.com/user-attachments/assets/cad03bd9-2a87-42f5-81a3-4b568f4b4db7)
+![Screenshot 2025-04-30 at 19-53-04 Fitness Tracker](https://github.com/user-attachments/assets/3d08e125-bf38-4aa0-9c31-64d4167a6b2a)
 
 ## Profile Section ## 
 
