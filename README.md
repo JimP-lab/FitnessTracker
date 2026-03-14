@@ -69,10 +69,10 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 
 This application has been promoted across this platforms during the launch.
 
-- **Discord** - Community discussions and real-time announcements.
-- **daily.dev** - Featured in the developer community.
+- **Discord** - Community discussions and real-time announcements on scrimba.
+- **daily.dev** - Shared in the BuildWithGenAi community.
 - **Reddit** - Shared across fitness niche and related developer subreddits.
 
 **Note:** Marketing materials reflect the application's branding at the time of each campaign and the domain was updated during the marketing process for improved branding consistency.
 
-View all promotional posts in our [**Social-Media-Posts**](./Social-Media-Posts/) directory.
+View all the promotional posts in [**Social-Media-Posts**](./Social-Media-Posts/) directory.
