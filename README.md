@@ -74,4 +74,4 @@ This application has been promoted across multiple platforms:
 
 **Note:** Marketing materials reflect the application's branding at the time of each campaign and the domain was updated during the marketing process for improved branding consistency.
 
-View all the promotional posts in [**Social-Media-Posts**](./Social-Media-Posts/) directory.
+View all promotional posts in our [**Social-Media-Posts**](./Social-Media-Posts/) directory.
