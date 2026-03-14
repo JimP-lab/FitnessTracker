@@ -65,4 +65,14 @@ Fitness Tracker is a comprehensive application designed to help users monitor th
 
 ![Screenshot 2025-04-30 at 19-55-27 Contact Us](https://github.com/user-attachments/assets/8301ed7f-d3bd-472e-9952-4aec78d5e890)
 
+### Promotional Channels And Marketing Materials ###
 
+This application has been promoted across this platforms during the launch.
+
+- **Discord** - Community discussions and real-time announcements.
+- **daily.dev** - Featured in the developer community.
+- **Reddit** - Shared across fitness niche and related developer subreddits.
+
+**Note:** Marketing materials reflect the application's branding at the time of each campaign and the domain was updated during the marketing process for improved branding consistency.
+
+View all promotional posts in our [**Social-Media-Posts**](./Social-Media-Posts/) directory.
